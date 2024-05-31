@@ -1,3 +1,8 @@
+concurrency:
+  group: ${{github.repository}}-concurrency
+  cancel-in-progess: true
+
+
 name: push-to-ecr
 on:
   push
@@ -13,6 +18,14 @@ permissions:
   contents: read    # This is required for actions/checkout
 jobs:
   deploy:
+    concurrency-2:
+      concurrency:
+        group: ${{github.repository}}-concurrency
+        cancel-in-progess: true
+
+
+
+  
     name: Deploy
     runs-on: ubuntu-latest
     steps:
@@ -40,17 +53,12 @@ jobs:
         run: |
           # Build a docker container and push it to ECR
 
-          echo "building version mod1  ..."
-          docker build -f mod1/Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod1_latest .
-          echo "pushing image to ECR ..."
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod1_latest
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod1_latest "
-
           echo "building version mod2  ..."
           docker build -f mod2/Dockerfile_mod2 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest .
           echo "pushing image to ECR ..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest "
+
           
 
   
