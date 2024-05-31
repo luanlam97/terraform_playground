@@ -4,7 +4,7 @@ concurrency:
 
 
 
-name: push-to-ecr
+name: push-to-ecr-2
 on:
   push
 

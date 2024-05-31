@@ -3,7 +3,7 @@ concurrency:
   cancel-in-progress: false
 
 
-name: push-to-ecr
+name: push-to-ecr-1
 on:
   push
 
