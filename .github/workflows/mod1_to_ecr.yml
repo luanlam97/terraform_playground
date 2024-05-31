@@ -20,7 +20,7 @@ jobs:
 
   concurrency-1:
     concurrency:
-      group: ${{github.repository}}-concurrency-for-workflow
+      group: ${{github.repository}}-concurrency-for-job
       cancel-in-progress: false
 
     name: Deploy
