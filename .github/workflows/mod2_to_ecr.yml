@@ -2,10 +2,10 @@
 
 
 
-name: push-to-ecr-2
+name: mod2_to_ecr
 on:
   workflow_run:
-    workflows: [push-to-ecr-1]
+    workflows: [mod1_to_ecr]
     types:
       - completed
 

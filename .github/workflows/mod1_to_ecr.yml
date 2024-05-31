@@ -1,5 +1,5 @@
 
-name: push-to-ecr-1
+name: mod1_to_ecr
 on:
   push
 
