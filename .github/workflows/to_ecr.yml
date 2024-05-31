@@ -39,7 +39,7 @@ jobs:
         run: |
           # Build a docker container and push it to ECR
           echo "building version mod1  ..."
-          docker build mod1/Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod1 .
+          docker build -f mod1/Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod1 .
           echo "pushing image to ECR ..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod1 
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod1 "
