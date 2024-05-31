@@ -1,0 +1,48 @@
+name: push-to-ecr
+on:
+  push
+
+env:
+  BUCKET_NAME : ${{ secrets.AWS_BUCKET_NAME }}
+  AWS_REGION : ${{ secrets.AWS_REGION }}
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
+      - name: login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: build, tag, and push the image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
+        run: |
+          # Build a docker container and push it to ECR
+          echo "building version mod1  ..."
+          docker build Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod1 .
+          echo "pushing image to ECR ..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod1 
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod1 "
+
+          echo "building version mod2  ..."
+          docker build Dockerfile_mod2 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod2 .
+          echo "pushing image to ECR ..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2 
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2 "

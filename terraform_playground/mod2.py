@@ -1,7 +1,8 @@
-import numpy
+import numpy as np
 
 def multiply(x = 1, y = 2):
-    return x * y
+    output = np.multiply(np.array([x]), np.array([y]))
+    return output
 
 
 if __name__ == "__main__":
