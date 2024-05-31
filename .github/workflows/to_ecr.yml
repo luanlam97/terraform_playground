@@ -3,6 +3,8 @@ on:
   push
 
 env:
+  AWS_ACESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   BUCKET_NAME : ${{ secrets.AWS_BUCKET_NAME }}
   AWS_REGION : ${{ secrets.AWS_REGION }}
 
@@ -46,4 +48,3 @@ jobs:
           echo "pushing image to ECR ..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2 
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2 "
-          
