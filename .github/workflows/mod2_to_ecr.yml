@@ -1,6 +1,6 @@
 concurrency:
-  group: ${{github.repository}}-concurrency
-  cancel-in-progess: true
+  group: ${{github.repository}}-concurrency-for-workflow
+
 
 
 name: push-to-ecr
@@ -20,8 +20,8 @@ jobs:
 
   concurrency-2:
     concurrency:
-      group: ${{github.repository}}-concurrency
-      cancel-in-progess: true
+      group: ${{github.repository}}-concurrency-for-workflow
+ 
     name: Deploy
     runs-on: ubuntu-latest
     steps:
