@@ -46,3 +46,4 @@ jobs:
           echo "pushing image to ECR ..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2 
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2 "
+          
