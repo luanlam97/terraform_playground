@@ -18,7 +18,7 @@ permissions:
   contents: read    # This is required for actions/checkout
 jobs:
 
-  concurrency-2:
+  concurrency-1:
     concurrency:
       group: ${{github.repository}}-concurrency-for-workflow
       cancel-in-progress: false
