@@ -40,13 +40,9 @@ jobs:
           # Build a docker container and push it to ECR
 
           echo "building version mod1  ..."
-          docker build -f mod1/Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod1 .
+          docker build -f mod1/Dockerfile_mod1 -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           echo "pushing image to ECR ..."
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod1 
+          docker push public.ecr.aws/n1f3w5f0/luan_ecr_test:latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod1 "
 
-          echo "building version mod2  ..."
-          docker build -f mod2/Dockerfile_mod2 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod2 .
-          echo "pushing image to ECR ..."
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2 
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2 "
+  
