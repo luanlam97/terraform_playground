@@ -5,6 +5,7 @@
 name: push-to-ecr-2
 on:
   workflow_run:
+    workflows: [push-to-ecr-1]
     types:
       - completed
 
