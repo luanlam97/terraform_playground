@@ -1,6 +1,4 @@
-concurrency:
-  group: ${{github.repository}}-concurrency-for-workflow
-  cancel-in-progress: false
+
 
 
 
