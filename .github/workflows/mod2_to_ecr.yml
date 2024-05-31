@@ -2,10 +2,10 @@
 
 
 
-name: mod2_to_ecr
+name: tf_build_ec2
 on:
   workflow_run:
-    workflows: [mod1_to_ecr]
+    workflows: [mod_to_ecr]
     types:
       - completed
 

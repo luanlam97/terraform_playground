@@ -50,5 +50,12 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod1_latest "
 
           
+          echo "building version mod2  ..."
+          docker build -f mod2/Dockerfile_mod2 -t $ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest .
+          echo "pushing image to ECR ..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:mod2_latest "
+
+          
 
   
