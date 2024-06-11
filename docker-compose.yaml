@@ -1,0 +1,9 @@
+services:
+  mongo-chatui:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+  chatui:
+    image: lamb
+    ports:
+      - "3000:3000"
