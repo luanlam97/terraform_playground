@@ -5,7 +5,7 @@
 name: tf_build_ec2
 on:
   workflow_run:
-    workflows: [mod_to_ecr]
+    workflows: [lamb_to_ecr]
     types:
       - completed
 
